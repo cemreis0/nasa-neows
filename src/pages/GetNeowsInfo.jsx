@@ -1,28 +1,32 @@
-import { React, useState, useEffect } from "react"
+import { React, useState, useEffect} from "react"
 import axios from "axios"
 
 const GetNeowsInfo = () => {
 
   const [loader, setLoader] = useState(true)
   const [data, setData] = useState([])
-  const [startdate, setStartdate] = useState("2023-05-02")
-  const [enddate, setEnddate] = useState("2023-05-08")
+  const [startdate, setStartdate] = useState(new Date().toISOString().slice(0, 10))
+  const [enddate, setEnddate] = useState(new Date().toISOString().slice(0, 10))
+
+  const fetchData = async (startdate, enddate) => {
+    try {
+      setLoader(true)
+      const response = await axios.get(`http://127.0.0.1:8000/getneowsinfo/${startdate}&${enddate}`)
+      setData(JSON.parse(response.data[0]).near_earth_objects)
+    } catch (error) {
+      console.log(error.message)
+    }
+    setLoader(false)
+  }
 
   useEffect(() => {
-    const fetchData = async (startdate, enddate) => {
-      try {
-        setLoader(true)
-        const response = await axios.get(`http://127.0.0.1:8000/getneowsinfo/${startdate}&${enddate}`)
-        setData(JSON.parse(response.data[0]).near_earth_objects)
-      } catch (error) {
-        console.log(error.message)
-      }
-      setLoader(false)
-    }
-    fetchData(startdate, enddate)
-  }, [startdate, enddate])
+    fetchData(new Date().toISOString().slice(0, 10), new Date().toISOString().slice(0, 10))
+  }, [])
 
-  console.log(data)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    fetchData(startdate, enddate)
+  }
 
   return (
     <div id="container">
@@ -33,6 +37,13 @@ const GetNeowsInfo = () => {
       }
       {!loader &&
         <div style={{ textAlign: "center", marginTop: "10px" }}>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="startdate">Start date</label>
+            <input id="startdate" onChange={(e) => {setStartdate(e.target.value)}} type="date" />
+            <label htmlFor="enddate">End date</label>
+            <input id="enddate" onChange={(e) => {setEnddate(e.target.value)}} type="date" />
+            <input type="submit" value="Submit" />
+          </form>
           {Object.entries(data).map((element, key) => (
             <div key={key}>{element[0]}: {element[1].map((element, key) => (<p key={key}>
               name: {element.name},
