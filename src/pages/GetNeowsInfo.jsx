@@ -8,10 +8,6 @@ const GetNeowsInfo = () => {
   const [startdate, setStartdate] = useState("2023-05-02")
   const [enddate, setEnddate] = useState("2023-05-08")
 
-  // data to be shown
-  const [dates, setDates] = useState([])
-  const [names, setNames] = useState([])
-
   useEffect(() => {
     const fetchData = async (startdate, enddate) => {
       try {
@@ -26,7 +22,7 @@ const GetNeowsInfo = () => {
     fetchData(startdate, enddate)
   }, [startdate, enddate])
 
-  console.log(Object.entries(data).map(element => console.log(element)))
+  console.log(data)
 
   return (
     <div id="container">
@@ -38,7 +34,22 @@ const GetNeowsInfo = () => {
       {!loader &&
         <div style={{ textAlign: "center", marginTop: "10px" }}>
           {Object.entries(data).map((element, key) => (
-            <p key={key}>{element[0]}: {element[1][0].name}</p>
+            <div key={key}>{element[0]}: {element[1].map((element, key) => (<p key={key}>
+              name: {element.name},
+              absolute magnitude: {element.absolute_magnitude_h},
+              close approach date: {element.close_approach_data[0].close_approach_date},
+              close approach date full: {element.close_approach_data[0].close_approach_date_full},
+              miss distance kilometers: {element.close_approach_data[0].miss_distance.kilometers},
+              orbiting body: {element.close_approach_data[0].orbiting_body},
+              relative velocity kilometers per hour: {element.close_approach_data[0].relative_velocity.kilometers_per_hour}
+              maximum estimated diameter kilometers: {element.estimated_diameter.kilometers.estimated_diameter_max},
+              minimum estimated diameter kilometers: {element.estimated_diameter.kilometers.estimated_diameter_min},
+              id: {element.id},
+              is potentially hazardous: {element.is_potentially_hazardous_asteroid.toString()},
+              is sentry object: {element.is_sentry_object.toString()},
+              neo reference id: {element.neo_reference_id}
+            </p>) )}
+            </div>
           ))}
         </div>
       }
