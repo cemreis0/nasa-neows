@@ -32,6 +32,9 @@ const GetNeowsInfo = () => {
   const maxEnddate = new Date(startdate)  
   maxEnddate.setDate(maxEnddate.getDate() + 7)
 
+  const minEnddate = new Date(startdate)  
+  minEnddate.setDate(minEnddate.getDate() - 7)
+
   return (
     <div className="container" style={{ backgroundColor: "#39414A", color: "#BECBDA" }}>
       {loader &&
@@ -54,7 +57,7 @@ const GetNeowsInfo = () => {
               </div>
               <div id="form-item" style={{ marginInline: "5px" }}>
                 <h4>End Date</h4>
-                <input id="enddate" onChange={(e) => {setEnddate(e.target.value)}} type="date" value={startdate} min={startdate} max={maxEnddate.toISOString().split("T")[0]} />
+                <input id="enddate" onChange={(e) => {setEnddate(e.target.value)}} type="date" value={startdate} min={minEnddate.toISOString().split("T")[0]} max={maxEnddate.toISOString().split("T")[0]} />
               </div>
               <input id="submit" type="submit" value="Get Results" />
             </div>
