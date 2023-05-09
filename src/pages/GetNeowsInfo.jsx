@@ -1,12 +1,13 @@
 import { React, useState, useEffect} from "react"
 import axios from "axios"
+import "./GetNeowsInfo.css"
 
 const GetNeowsInfo = () => {
 
   const [loader, setLoader] = useState(true)
   const [data, setData] = useState([])
-  const [startdate, setStartdate] = useState(new Date().toISOString().slice(0, 10))
-  const [enddate, setEnddate] = useState(new Date().toISOString().slice(0, 10))
+  const [startdate, setStartdate] = useState(new Date().toISOString().split("T")[0])
+  const [enddate, setEnddate] = useState(new Date().toISOString().split("T")[0])
 
   const fetchData = async (startdate, enddate) => {
     try {
@@ -20,7 +21,7 @@ const GetNeowsInfo = () => {
   }
 
   useEffect(() => {
-    fetchData(new Date().toISOString().slice(0, 10), new Date().toISOString().slice(0, 10))
+    fetchData(new Date().toISOString().split("T")[0], new Date().toISOString().split("T")[0])
   }, [])
 
   const handleSubmit = (e) => {
@@ -28,38 +29,58 @@ const GetNeowsInfo = () => {
     fetchData(startdate, enddate)
   }
 
+  const maxEnddate = new Date(startdate)  
+  maxEnddate.setDate(maxEnddate.getDate() + 7)
+
   return (
-    <div id="container">
+    <div className="container" style={{ backgroundColor: "#39414A", color: "#BECBDA" }}>
       {loader &&
-        <div style={{ textAlign: "center", marginTop: "10px" }}>
+        <div style={{ textAlign: "center", padding: "48.5vh"}}>
           <h3>Retrieving NeoWs Info...</h3>
         </div>
       }
-      {!loader &&
-        <div style={{ textAlign: "center", marginTop: "10px" }}>
+      {!data &&
+        <div style={{ textAlign: "center", padding: "48.5vh"}}>
+          <h3>You must choose a maximum of one week interval! Refresh the page to continue.</h3>
+        </div>
+      }
+      {!loader && data &&
+        <div style={{ textAlign: "center", padding: "2vh" }}>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="startdate">Start date</label>
-            <input id="startdate" onChange={(e) => {setStartdate(e.target.value)}} type="date" />
-            <label htmlFor="enddate">End date</label>
-            <input id="enddate" onChange={(e) => {setEnddate(e.target.value)}} type="date" />
-            <input type="submit" value="Submit" />
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ marginInline: "5px" }}>
+                <h4>Start Date</h4>
+                <input id="startdate" onChange={(e) => {setStartdate(e.target.value)}} type="date" value={startdate} />
+              </div>
+              <div style={{ marginInline: "5px" }}>
+                <h4>End Date</h4>
+                <input id="enddate" onChange={(e) => {setEnddate(e.target.value)}} type="date" value={startdate} min={startdate} max={maxEnddate.toISOString().split("T")[0]} />
+              </div>
+              <input id="submit" type="submit" value="Get Results" />
+            </div>
           </form>
           {Object.entries(data).map((element, key) => (
-            <div key={key}>{element[0]}: {element[1].map((element, key) => (<p key={key}>
-              name: {element.name},
-              absolute magnitude: {element.absolute_magnitude_h},
-              close approach date: {element.close_approach_data[0].close_approach_date},
-              close approach date full: {element.close_approach_data[0].close_approach_date_full},
-              miss distance kilometers: {element.close_approach_data[0].miss_distance.kilometers},
-              orbiting body: {element.close_approach_data[0].orbiting_body},
-              relative velocity kilometers per hour: {element.close_approach_data[0].relative_velocity.kilometers_per_hour}
-              maximum estimated diameter kilometers: {element.estimated_diameter.kilometers.estimated_diameter_max},
-              minimum estimated diameter kilometers: {element.estimated_diameter.kilometers.estimated_diameter_min},
-              id: {element.id},
-              is potentially hazardous: {element.is_potentially_hazardous_asteroid.toString()},
-              is sentry object: {element.is_sentry_object.toString()},
-              neo reference id: {element.neo_reference_id}
-            </p>) )}
+            <div key={key} style={{ marginBottom: "50px" }}>
+              <h3 style={{ marginTop: "20px", marginBottom: "10px" }}>Near Earth Asteroid Activity on {element[0]}</h3>
+              <div className="grid-container">
+                {element[1].map((element, key) => (
+                  <div key={key} style={{ border: "1px solid #5579C4", textAlign: "start" }}>
+                    <div className="grid-item">Name: {element.name}</div>
+                    <div className="grid-item">Absolute Magnitude (H): {element.absolute_magnitude_h}</div>
+                    <div className="grid-item">Close Approach Date: {element.close_approach_data[0].close_approach_date}</div>
+                    <div className="grid-item">Close Approach Date (Full): {element.close_approach_data[0].close_approach_date_full}</div>
+                    <div className="grid-item">Miss Distance (km): {element.close_approach_data[0].miss_distance.kilometers}</div>
+                    <div className="grid-item">Orbiting Body: {element.close_approach_data[0].orbiting_body}</div>
+                    <div className="grid-item">Relative Velocity (km/h): {element.close_approach_data[0].relative_velocity.kilometers_per_hour}</div>
+                    <div className="grid-item">Maximum Estimated Diameter (km): {element.estimated_diameter.kilometers.estimated_diameter_max}</div>
+                    <div className="grid-item">Minimum Estimated Diameter (km): {element.estimated_diameter.kilometers.estimated_diameter_min}</div>
+                    <div className="grid-item">ID: {element.id}</div>
+                    <div className="grid-item">Is Potentially Hazardous Asteroid: {element.is_potentially_hazardous_asteroid.toString()}</div>
+                    <div className="grid-item">Is Sentry Object: {element.is_sentry_object.toString()}</div>
+                    <div className="grid-item" style={{ borderBottom: "none" }}>Neo Reference ID: {element.neo_reference_id}</div> 
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
