@@ -47,12 +47,12 @@ const GetNeowsInfo = () => {
       {!loader && data &&
         <div style={{ textAlign: "center", padding: "2vh" }}>
           <form onSubmit={handleSubmit}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <div style={{ marginInline: "5px" }}>
+            <div id="form" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div id="form-item" style={{ marginInline: "5px" }}>
                 <h4>Start Date</h4>
                 <input id="startdate" onChange={(e) => {setStartdate(e.target.value)}} type="date" value={startdate} />
               </div>
-              <div style={{ marginInline: "5px" }}>
+              <div id="form-item" style={{ marginInline: "5px" }}>
                 <h4>End Date</h4>
                 <input id="enddate" onChange={(e) => {setEnddate(e.target.value)}} type="date" value={startdate} min={startdate} max={maxEnddate.toISOString().split("T")[0]} />
               </div>
