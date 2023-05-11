@@ -7,13 +7,16 @@ const GetNeowsLookup = () => {
   const [loader, setLoader] = useState(true)
   const [data, setData] = useState([])
   const [id, setId] = useState("")
+  const [error, setError] = useState("")
 
   const fetchData = async (id) => {
     try {
       setLoader(true)
       const response = await axios.get(`http://127.0.0.1:8000/getneowslookup/${id}`)
-      setData(JSON.parse(response.data[0]))
-    } catch (error) {}
+      setData(response.data[0])
+    } catch (error) {
+      setError(error.message)
+    }
     setLoader(false)
   }
 
@@ -35,23 +38,21 @@ const GetNeowsLookup = () => {
           <h3>Retrieving NeoWs Info...</h3>
         </div>
       }
-      {!data &&
-        <div style={{ textAlign: "center", padding: "48.5vh"}}>
-          <h3>An error occured. Refresh the page to continue.</h3>
-        </div>
-      }
-      {!loader && data &&
+      {!loader &&
         <div style={{ textAlign: "center", minHeight: "96vh", padding: "2vh" }}>
           <form onSubmit={handleSubmit}>
+            <h3 style={{ margin: "10px" }}>Hint: Use NeoWs feed to get the ID of an asteroid.</h3>
             <div id="form" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
               <div id="form-item" style={{ marginInline: "5px" }}>
                 <h4>ID of an Asteroid</h4>
-                <input type="number" value={id} onChange={(e) => setId(e.target.value)} />
+                <input type="string" value={id} onChange={(e) => setId(e.target.value)} />
               </div>
               <input id="submit" type="submit" value="Get Results" />
             </div>
           </form>
-          <p>{data.name}</p>
+          <div id="data" style={{ margin: "10px" }}>
+            {data ? data : error}
+          </div>
         </div>
       }
     </div>
