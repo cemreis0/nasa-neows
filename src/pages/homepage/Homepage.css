@@ -1,0 +1,21 @@
+.container {
+  flex-flow: wrap;
+}
+
+div #url {
+  margin-top: 25px;
+}
+
+#anchor {
+  text-decoration: none;
+  background-color: #5579C4;
+  display: inline-block;
+  width: 150px;
+  padding: 10px 20px 10px 20px;
+  border-radius: 500px;
+  color: #BECBDA;
+}
+
+#anchor:hover {
+  filter: brightness(0.75);
+}

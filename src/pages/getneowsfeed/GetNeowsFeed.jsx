@@ -1,8 +1,8 @@
 import { React, useState, useEffect} from "react"
 import axios from "axios"
-import "./GetNeowsInfo.css"
+import "./GetNeowsFeed.css"
 
-const GetNeowsInfo = () => {
+const GetNeowsFeed = () => {
 
   const [loader, setLoader] = useState(true)
   const [data, setData] = useState([])
@@ -12,7 +12,7 @@ const GetNeowsInfo = () => {
   const fetchData = async (startdate, enddate) => {
     try {
       setLoader(true)
-      const response = await axios.get(`http://127.0.0.1:8000/getneowsinfo/${startdate}&${enddate}`)
+      const response = await axios.get(`http://127.0.0.1:8000/getneowsfeed/${startdate}&${enddate}`)
       setData(JSON.parse(response.data[0]).near_earth_objects)
     } catch (error) {
       console.log(error.message)
@@ -44,7 +44,7 @@ const GetNeowsInfo = () => {
       }
       {!data &&
         <div style={{ textAlign: "center", padding: "48.5vh"}}>
-          <h3>You must choose a maximum of one week interval! Refresh the page to continue.</h3>
+          <h3>An error occured. Refresh the page to continue.</h3>
         </div>
       }
       {!loader && data &&
@@ -92,4 +92,4 @@ const GetNeowsInfo = () => {
   )
 }
 
-export default GetNeowsInfo
+export default GetNeowsFeed
