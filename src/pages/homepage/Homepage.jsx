@@ -3,7 +3,7 @@ import "./Homepage.css"
 
 const Homepage = () => {
   return (
-    <div className="container" style={{ backgroundColor: "#39414A", color: "#BECBDA", textAlign: "center", padding: "39.6vh" }}>
+    <div className="homepage">
       <h3>Near Earth Object Web Service (NeoWs)</h3>
       <div id="url">
         <a id="anchor" type="button" href="/getneowsfeed">NeoWs Feed</a>

@@ -1,0 +1,15 @@
+.input {
+  background-color: #5579C4;
+  padding: 10px;
+  width: 150px;
+  border: none;
+  color: #BECBDA;
+  border-radius: 500px;
+  margin-top: auto;
+  text-align: center;
+  -webkit-text-fill-color: #BECBDA;
+}
+
+.input:hover {
+  filter: brightness(0.75)
+}

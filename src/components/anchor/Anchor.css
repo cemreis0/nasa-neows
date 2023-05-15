@@ -1,0 +1,17 @@
+.anchor {
+  text-decoration: none;
+  background-color: #5579C4;
+  display: inline-block;
+  width: 150px;
+  border-radius: 500px;
+  color: #BECBDA;
+  padding: 10px;
+  border: none;
+  margin-top: auto;
+  text-align: center;
+}
+
+.anchor:hover {
+  filter: brightness(0.75);
+  cursor: pointer;
+}

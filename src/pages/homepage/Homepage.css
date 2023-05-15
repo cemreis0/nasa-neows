@@ -1,5 +1,8 @@
-.container {
-  flex-flow: wrap;
+.homepage {
+  background-color: #39414A;
+  color: #BECBDA;
+  text-align: center;
+  padding: 31.5vh 0;
 }
 
 div #url {

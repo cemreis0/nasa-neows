@@ -1,0 +1,22 @@
+@media only screen and (max-width: 1024px) {
+  .footeritems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.footeritems {
+  background-color: #39414A;
+  padding: 10px 0px 10px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-inline: 25%;
+}
+
+hr {
+  border-top: 0.5px;
+  border-color: solid #BECBDA;
+}

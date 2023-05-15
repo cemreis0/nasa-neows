@@ -1,0 +1,27 @@
+@media only screen and (max-width: 1024px) {
+  .navitems, .navlinks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.navitems {
+  background-color: #39414A;
+  padding: 10px 0px 10px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-inline: 25%;
+}
+
+.navlinks {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+hr {
+  border: 1px solid #BECBDA;
+}

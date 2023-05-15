@@ -1,20 +1,55 @@
-.container {
+@media only screen and (max-width: 1024px) {
+  .container {
+    padding-inline: 0;
+  }
+  .grid-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .form {
+    display: block !important;
+  }
+  .form-item {
+    margin-bottom: 10px !important;
+  }
+}
+
+.getneowsfeed {
+  background-color: #39414A;
+  color: #BECBDA;
   padding-inline: 10%;
 }
 
-@media only screen and (max-width: 1024px) {
-  .container {
-    padding-inline: 0 !important;
-  }
-  .grid-container {
-    grid-template-columns: repeat(1, 1fr) !important;
-  }
-  #form {
-    display: block !important;
-  }
-  #form #form-item, #form #submit {
-    margin-top: 10px !important;
-  }
+.heading {
+  padding: 50px 0 50px 0;
+  font-size: larger;
+}
+
+.loader, error {
+  text-align: center;
+  padding: 40.4vh 0;
+}
+
+.data {
+ text-align: center; 
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-item {
+  margin-inline: 5px;
+}
+
+.entries {
+  padding-bottom: 50px;
+}
+
+.dateheading {
+  margin-bottom: 10px;
+  margin-top: 20px;
 }
 
 .grid-container {
@@ -24,24 +59,17 @@
   grid-auto-rows: minmax(100px, auto);
 }
 
+.grid {
+  border: 1px solid #5579C4;
+  text-align: start;
+}
+
 .grid-item {
   border-bottom: 1px solid #5579C4;
   margin-top: 1px;
   padding-left: 5px;
 }
 
-#startdate, #enddate, #submit {
-  background-color: #5579C4;
-  padding: 10px;
-  border: none;
-  color: #BECBDA;
-  border-radius: 500px;
-  margin-top: auto;
-  text-align: center;
-  text-emphasis-color: red;
-  -webkit-text-fill-color: #BECBDA;
-}
-
-input#submit:hover {
-  filter: brightness(0.75)
+.grid-item:last-child {
+  border-bottom: none;
 }
