@@ -1,52 +1,123 @@
 .container {
-  padding-inline: 10%;
+  background-color: #39414A;
+  color: #BECBDA;
 }
 
-@media only screen and (max-width: 1024px) {
-  .container {
-    padding-inline: 0 !important;
-  }
-  .grid-container {
-    grid-template-columns: repeat(1, 1fr) !important;
-  }
-  #form {
-    display: block !important;
-  }
-  #form #form-item, #form #submit {
-    margin-top: 10px !important;
-  }
+.data {
+  text-align: center;
+  min-height: 79.4vh;
+  padding: 2vh;
 }
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-item {
+  margin-inline: 5px;
+}
+
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr); /* Change the number of columns as needed */
   gap: 20px;
   grid-auto-rows: minmax(100px, auto);
+}
+
+.grid {
+  border: 1px solid #5579C4;
+  text-align: center; /* Change the text alignment as needed */
 }
 
 .grid-item {
   border-bottom: 1px solid #5579C4;
   margin-top: 1px;
-  padding-left: 5px;
+  padding: 5px; /* Change the padding as needed */
 }
 
-#submit {
+.grid-item:last-child {
+  border-bottom: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+}
+
+thead th {
+  background-color: #BECBDA;
+  color: #5579C4;
+}
+
+tbody tr:nth-child(even) {
   background-color: #5579C4;
-  padding: 10px;
-  border: none;
-  color: #BECBDA;
-  border-radius: 500px;
-  margin-top: auto;
-  text-align: center;
-  text-emphasis-color: red;
-  -webkit-text-fill-color: #BECBDA;
 }
 
-input#submit:hover {
-  filter: brightness(0.75)
+@media screen and (max-width: 1024px) {
+  .data-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    border: 1px solid #5579C4;
+  }
+
+  th,
+  td {
+    white-space: nowrap;
+  }
+
+  thead,
+  tbody,
+  tr,
+  th,
+  td {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  td {
+    border: none;
+    position: relative;
+    padding-left: 45%;
+  }
+
+  td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    content: attr(data-label);
+    font-weight: bold;
+    color: #5579C4;
+  }
 }
 
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.data-grid {
+  display: grid;
+  margin: 50px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.data-grid h3 {
+  border: 1px solid #5579C4;
 }

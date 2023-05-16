@@ -2,6 +2,7 @@ import { React, useState, useEffect} from "react"
 import axios from "axios"
 import "./GetNeowsFeed.css"
 import Input from "./../../components/input/Input"
+import Loader from "../../components/loader/Loader"
 
 const GetNeowsFeed = () => {
 
@@ -39,9 +40,7 @@ const GetNeowsFeed = () => {
   return (
     <div className="getneowsfeed">
       {loader &&
-        <div className="loader">
-          <h3>Retrieving NeoWs Info...</h3>
-        </div>
+        <Loader />
       }
       {!data &&
         <div className="error">

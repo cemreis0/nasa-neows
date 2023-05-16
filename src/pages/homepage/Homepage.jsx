@@ -1,15 +1,16 @@
 import { React } from "react"
 import "./Homepage.css"
+import Anchor from "./../../components/anchor/Anchor"
 
 const Homepage = () => {
   return (
     <div className="homepage">
       <h3>Near Earth Object Web Service (NeoWs)</h3>
-      <div id="url">
-        <a id="anchor" type="button" href="/getneowsfeed">NeoWs Feed</a>
+      <div className="url">
+        <Anchor href="/getneowsfeed" value="NeoWs Feed" />
       </div>
-      <div id="url">
-        <a id="anchor" type="button" href="/getneowslookup">NeoWs Lookup</a>
+      <div className="url">
+        <Anchor href="/getneowslookup" value="NeoWs Lookup" />
       </div>
     </div>
   )

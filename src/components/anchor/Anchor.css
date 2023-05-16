@@ -1,12 +1,11 @@
 .anchor {
   text-decoration: none;
-  background-color: #5579C4;
+  color: #5579C4;
   display: inline-block;
   width: 150px;
   border-radius: 500px;
-  color: #BECBDA;
+  filter: brightness(1.5);
   padding: 10px;
-  border: none;
   margin-top: auto;
   text-align: center;
 }

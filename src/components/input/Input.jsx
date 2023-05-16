@@ -1,8 +1,8 @@
 import "./Input.css"
 
-const Input = ({value, type, onChange, min, max}) => {
+const Input = ({value, type, onChange, min, max, placeholder, id}) => {
   return (
-    <input className="input" type={type ? type : "button"} value={value ? value : "Input"} onChange={onChange} min={min} max={max} />
+    <input className="input" id={id} type={type ? type : "button"} placeholder={placeholder} value={value} onChange={onChange} min={min} max={max} />
   )
 }
 
