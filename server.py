@@ -18,12 +18,12 @@ app.add_middleware(
 
 @app.get("/getneowsfeed/{startdate}&{enddate}")
 async def getneowsinfo(startdate: str, enddate: str):
-  apikey = "bMnrC6qR1zVWGnGLPhdqzCaI9wk2f7Os6WINeNRQ"
+  apikey = ""
   neowsfeed = requests.get(f"https://api.nasa.gov/neo/rest/v1/feed?start_date={startdate}&end_date={enddate}&api_key={apikey}")
   return {neowsfeed.text}
 
 @app.get("/getneowslookup/{id}")
 async def getneowslookup(id: int):
-  apikey = "bMnrC6qR1zVWGnGLPhdqzCaI9wk2f7Os6WINeNRQ"
+  apikey = ""
   neowslookup = requests.get(f"https://api.nasa.gov/neo/rest/v1/neo/{id}?api_key={apikey}")
   return {neowslookup.text}
